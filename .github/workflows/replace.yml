@@ -1,0 +1,24 @@
+name: Replace index.html
+
+on:
+  workflow_dispatch:
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace index.html with church-app-starter.html
+        run: |
+          set -e
+          git config user.name "nareshgumala123"
+          git config user.email "nareshgumala123@users.noreply.github.com"
+          test -f church-app-starter.html
+          test -f index.html
+          git rm index.html
+          git mv church-app-starter.html index.html
+          git status --short
+          git commit -m "Replace index.html with new version"
+          git push origin HEAD:main
