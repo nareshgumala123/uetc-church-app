@@ -53,9 +53,14 @@
       .apphead .who{min-width:0}
       .apphead .who strong{display:block;font-size:15px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;font-weight:800}
       .apphead .who span{display:block;font-size:12.5px;color:var(--muted);margin-top:1px}
-      .apphead .call{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+      .apphead .call{flex:none;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
         background:var(--ink);color:var(--bg);border-radius:999px;padding:9px 16px;font-weight:700;font-size:13.5px}
       .apphead .call svg{width:15px;height:15px}
+      .apphead .sharebtn{margin-left:auto;flex:none;width:40px;height:40px;border-radius:999px;border:1.5px solid var(--line);
+        background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0}
+      .apphead .sharebtn svg{width:18px;height:18px}
+      .apphead .sharebtn:active{transform:scale(.96)}
+      .btn svg{width:17px;height:17px;flex:none}
 
       main{padding:0 0 116px}
       @media (min-width:1024px){ main{padding-bottom:32px} }
@@ -245,6 +250,9 @@
             <strong data-bind="churchName" data-label="Church name">United Evangelical Telugu Church</strong>
             <span data-bind="headerSub" data-label="Header line under church name">Maryland Heights, Missouri · Telugu &amp; English</span>
           </div>
+          <button class="sharebtn js-share-app" type="button" aria-label="Share this app" title="Share this app">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
           <a class="call tel-link" href="tel:+13142038851" aria-label="Call UETC">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Call
@@ -403,6 +411,21 @@
                   <a class="btn small tel-link" href="tel:+13142038851">Call <span data-bind="phoneDisplay">+1 (314) 203-8851</span></a>
                   <a class="btn small ghost dir-link" href="https://www.google.com/maps/search/?api=1&amp;query=2240+Bennington+Pl%2C+Maryland+Heights%2C+MO+63043" target="_blank" rel="noopener">Directions</a>
                 </div>
+              </div>
+            </section>
+
+            <section class="block" aria-labelledby="h-share-app">
+              <div class="sec-head"><h2 id="h-share-app">share this app</h2></div>
+              <div class="panel" style="margin-top:8px">
+                <p style="margin:0;font-size:14.5px;color:var(--ink-2)">Know someone who would love to worship with us? Send them the app — service times, sermons, events, prayer, and giving, all in one place.</p>
+                <div class="btnrow">
+                  <button class="btn js-share-app" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                    Share this app
+                  </button>
+                  <button class="btn ghost js-copy-app" type="button">Copy app link</button>
+                </div>
+                <p class="fineprint" style="margin:10px 0 0">Tap Share to send it by WhatsApp, text, or email. No download needed — it opens right in their browser, and they can add it to their home screen.</p>
               </div>
             </section>
 
@@ -1100,6 +1123,29 @@
         $("#noteCopy").addEventListener("click", function(){ copyText(notesText(), "Notes copied — paste them anywhere to keep them."); });
         $("#copyChannel").addEventListener("click", function(){
           copyText(settingsEl.getAttribute("data-youtube") || "https://www.youtube.com/@UNITEDEVANGELICALTELUGUCHURCH", "Channel link copied — send it to a friend.");
+        });
+
+        /* ---------- share this app (public church app link) ---------- */
+        var APP_URL = "https://nareshgumala123.github.io/uetc-church-app/";
+        function shareApp(){
+          var data = {
+            title: "United Evangelical Telugu Church",
+            text: "United Evangelical Telugu Church app — Sunday worship, sermons, events, prayer & giving:",
+            url: APP_URL
+          };
+          if (navigator.share){
+            navigator.share(data).catch(function(err){
+              if (err && err.name !== "AbortError"){
+                copyText(APP_URL, "App link copied — paste it to share the app.");
+              }
+            });
+          } else {
+            copyText(APP_URL, "App link copied — paste it to share the app.");
+          }
+        }
+        $$(".js-share-app").forEach(function(b){ b.addEventListener("click", shareApp); });
+        $$(".js-copy-app").forEach(function(b){
+          b.addEventListener("click", function(){ copyText(APP_URL, "App link copied — paste it to share the app."); });
         });
 
         /* ---------- giving planner (no payment is taken) ---------- */
