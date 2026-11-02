@@ -248,6 +248,15 @@
       .planrow:last-child{border-bottom:none;padding-bottom:2px}
       .planrow strong{flex:none;width:92px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
       .planrow span{font-size:15px;font-weight:600}
+      .planrow a{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:1px}
+      .planrow a:active{opacity:.7}
+      .planrow .niv-arrow{font-size:13px;color:var(--muted);font-weight:700;margin-left:4px;border:none}
+      .votd-link{color:inherit;text-decoration:none;display:block}
+      .votd-link:active{opacity:.85}
+      .votd-read{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13.5px;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:1px}
+      .niv-credit{font-size:11.5px;line-height:1.5;color:var(--muted);margin:10px 0 0}
+      .bible-grid{display:grid;grid-template-columns:1fr 108px;gap:10px;margin-top:6px}
+      @media (max-width:380px){ .bible-grid{grid-template-columns:1fr 96px} }
       .fieldbad{box-shadow:0 0 0 3px rgba(179,64,46,.35) !important}
 
       .toast{position:fixed;left:50%;transform:translate(-50%,20px);bottom:96px;z-index:60;background:var(--navy);color:#ffffff;border:1px solid var(--gold);
@@ -262,19 +271,19 @@
     <div id="appSettings" hidden data-service-start="09:00" data-service-end="10:30" data-youtube="https://www.youtube.com/@UNITEDEVANGELICALTELUGUCHURCH"></div>
     <div hidden aria-hidden="true">
       <pre id="votdStore">For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life. | John 3:16
-The Lord is my shepherd, I lack nothing. | Psalm 23:1
+The LORD is my shepherd, I lack nothing. | Psalm 23:1
 I can do all this through him who gives me strength. | Philippians 4:13
-Be strong and courageous, for the Lord your God will be with you wherever you go. | Joshua 1:9
-Trust in the Lord with all your heart and lean not on your own understanding. | Proverbs 3:5
-The Lord is my light and my salvation — whom shall I fear? | Psalm 27:1
+Be strong and courageous. Do not be afraid; do not be discouraged, for the LORD your God will be with you wherever you go. | Joshua 1:9
+Trust in the LORD with all your heart and lean not on your own understanding. | Proverbs 3:5
+The LORD is my light and my salvation — whom shall I fear? | Psalm 27:1
 Rejoice in the Lord always. I will say it again: Rejoice! | Philippians 4:4
-Let all that you do be done in love. | 1 Corinthians 16:14
+Do everything in love. | 1 Corinthians 16:14
 Your word is a lamp for my feet, a light on my path. | Psalm 119:105
 Come to me, all you who are weary and burdened, and I will give you rest. | Matthew 11:28
-Give thanks to the Lord, for he is good; his love endures forever. | Psalm 107:1
-The joy of the Lord is your strength. | Nehemiah 8:10
+Give thanks to the LORD, for he is good; his love endures forever. | Psalm 107:1
+Do not grieve, for the joy of the LORD is your strength. | Nehemiah 8:10
 Be still, and know that I am God. | Psalm 46:10
-This is the day the Lord has made; let us rejoice and be glad in it. | Psalm 118:24</pre>
+The LORD has done it this very day; let us rejoice today and be glad. | Psalm 118:24</pre>
       <pre id="serveStore"></pre>
       <pre id="planStore">Monday | Genesis 1
 Tuesday | Psalm 23
@@ -328,8 +337,12 @@ Sunday | John 4</pre>
             <section class="block" style="margin-top:26px" aria-labelledby="h-votd">
               <div class="sec-head"><h2 id="h-votd">verse of the day</h2><span class="tag" id="votdDate" style="margin-left:auto"></span></div>
               <div class="panel" style="margin-top:8px">
-                <p class="votd-text" id="votdText"></p>
-                <p class="votd-ref" id="votdRef"></p>
+                <a class="votd-link" id="votdLink" href="https://www.biblegateway.com/passage/?search=John%203%3A16&amp;version=NIV" target="_blank" rel="noopener" aria-label="Read this verse in the NIV on BibleGateway">
+                  <p class="votd-text" id="votdText"></p>
+                  <p class="votd-ref" id="votdRef"></p>
+                </a>
+                <a class="votd-read" id="votdReadLink" href="https://www.biblegateway.com/passage/?search=John%203%3A16&amp;version=NIV" target="_blank" rel="noopener">Read in NIV →</a>
+                <p class="niv-credit">Scripture quotations are from the New International Version® (NIV®). Tap the verse to read the full passage in NIV on BibleGateway.</p>
               </div>
             </section>
 
@@ -366,8 +379,8 @@ Sunday | John 4</pre>
             </section>
 
             <div class="verse" aria-label="Theme verse">
-              <p data-bind="verseText" data-label="Theme verse" data-field="area">&ldquo;God is spirit, and those who worship him must worship in spirit and truth.&rdquo;</p>
-              <span data-bind="verseRef" data-label="Theme verse reference">John 4:24 · Our theme verse</span>
+              <p data-bind="verseText" data-label="Theme verse" data-field="area">&ldquo;God is spirit, and his worshipers must worship in the Spirit and in truth.&rdquo;</p>
+              <span data-bind="verseRef" data-label="Theme verse reference">John 4:24 (NIV) · Our theme verse</span>
             </div>
 
             <section style="margin-top:34px" aria-labelledby="h-latest">
@@ -552,9 +565,36 @@ Sunday | John 4</pre>
             </section>
 
             <section class="block" aria-labelledby="h-readplan">
-              <div class="sec-head"><h2 id="h-readplan">read along this week</h2></div>
-              <p class="muted" style="margin:0" data-bind="planIntro" data-label="Reading plan intro" data-field="area">A simple plan — one passage a day. Read at your own pace; if you miss a day, just pick up with the next one.</p>
+              <div class="sec-head"><h2 id="h-readplan">read along this week</h2><span class="tag" style="margin-left:auto">NIV</span></div>
+              <p class="muted" style="margin:0" data-bind="planIntro" data-label="Reading plan intro" data-field="area">A simple plan — one passage a day. Tap any passage to read it in the NIV. Read at your own pace; if you miss a day, just pick up with the next one.</p>
               <div id="planList" style="margin-top:6px"></div>
+              <p class="niv-credit">All passages open in the New International Version (NIV) on BibleGateway.</p>
+            </section>
+
+            <section class="block" aria-labelledby="h-bible">
+              <div class="sec-head"><h2 id="h-bible">bible — niv</h2><span class="tag" style="margin-left:auto">New International Version</span></div>
+              <div class="panel" style="margin-top:8px">
+                <p style="margin:0;font-size:14.5px;color:var(--ink-2)">Read the Bible in the real NIV. Pick a book and chapter, then tap Read — the passage opens in the licensed NIV on BibleGateway.</p>
+                <label class="flabel" for="bibleBook">Book</label>
+                <select id="bibleBook" aria-label="Bible book"></select>
+                <div class="bible-grid">
+                  <div>
+                    <label class="flabel" for="bibleChapter">Chapter</label>
+                    <select id="bibleChapter" aria-label="Bible chapter"></select>
+                  </div>
+                  <div>
+                    <label class="flabel" for="bibleVersionLabel">Version</label>
+                    <div id="bibleVersionLabel" style="background:var(--surface);border-radius:12px;padding:13px 14px;font-weight:800;text-align:center">NIV</div>
+                  </div>
+                </div>
+                <a class="btn block" id="bibleReadBtn" href="https://www.biblegateway.com/passage/?search=John%201&amp;version=NIV" target="_blank" rel="noopener" style="margin-top:16px">Read John 1 in NIV</a>
+                <div class="btnrow">
+                  <a class="btn small ghost" href="https://www.biblegateway.com/passage/?search=Psalm%2023&amp;version=NIV" target="_blank" rel="noopener">Psalm 23</a>
+                  <a class="btn small ghost" href="https://www.biblegateway.com/passage/?search=John%203%3A16&amp;version=NIV" target="_blank" rel="noopener">John 3:16</a>
+                  <a class="btn small ghost" href="https://www.biblegateway.com/" target="_blank" rel="noopener">BibleGateway</a>
+                </div>
+                <p class="niv-credit">Holy Bible, New International Version®, NIV® Copyright © 1973, 1978, 1984, 2011 by Biblica, Inc.® Used by permission. Full text opens on BibleGateway.</p>
+              </div>
             </section>
 
             <section style="margin-top:34px" aria-labelledby="h-share">
@@ -622,7 +662,7 @@ Sunday | John 4</pre>
           <div class="view" id="view-give" role="tabpanel" aria-label="Give">
             <div class="verse flush">
               <p data-bind="giveVerseText" data-label="Give page verse" data-field="area">&ldquo;Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver.&rdquo;</p>
-              <span data-bind="giveVerseRef" data-label="Give page verse reference">2 Corinthians 9:7 · Give</span>
+              <span data-bind="giveVerseRef" data-label="Give page verse reference">2 Corinthians 9:7 (NIV) · Give</span>
             </div>
 
             <section class="block" aria-labelledby="h-give-qr">
@@ -1424,6 +1464,9 @@ Sunday | John 4</pre>
           serve: $("#serveStore").textContent,
           plan: $("#planStore").textContent
         };
+        function nivUrl(search){
+          return "https://www.biblegateway.com/passage/?search=" + encodeURIComponent(search) + "&version=NIV";
+        }
         function renderVotd(){
           var verses = parsePairs("votdStore");
           var t = $("#votdText"), r = $("#votdRef"), d = $("#votdDate");
@@ -1433,7 +1476,10 @@ Sunday | John 4</pre>
           var dayOfYear = Math.round((startOfDay(now) - startOfDay(new Date(now.getFullYear(), 0, 0))) / DAY);
           var v = verses[dayOfYear % verses.length];
           t.textContent = "\u201C" + v.a + "\u201D";
-          r.textContent = v.b;
+          r.textContent = v.b + " · NIV";
+          var url = nivUrl(v.b);
+          var link = $("#votdLink"); if (link) link.href = url;
+          var read = $("#votdReadLink"); if (read){ read.href = url; read.textContent = "Read " + v.b + " in NIV →"; }
           if (d) d.textContent = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
         }
         function renderServe(){
@@ -1455,10 +1501,47 @@ Sunday | John 4</pre>
             var div = document.createElement("div");
             div.className = "planrow";
             var s = document.createElement("strong"); s.textContent = row.a;
-            var sp = document.createElement("span"); sp.textContent = row.b;
-            div.appendChild(s); div.appendChild(sp);
+            var a = document.createElement("a");
+            a.href = nivUrl(row.b);
+            a.target = "_blank"; a.rel = "noopener";
+            a.textContent = row.b;
+            var arr = document.createElement("span"); arr.className = "niv-arrow"; arr.textContent = "NIV →";
+            a.appendChild(arr);
+            div.appendChild(s); div.appendChild(a);
             wrap.appendChild(div);
           });
+        }
+        /* ----- Bible (NIV) reader — links to licensed NIV on BibleGateway ----- */
+        var BIBLE_BOOKS = [
+          ["Genesis",50],["Exodus",40],["Leviticus",27],["Numbers",36],["Deuteronomy",34],["Joshua",24],["Judges",21],["Ruth",4],["1 Samuel",31],["2 Samuel",24],["1 Kings",22],["2 Kings",25],["1 Chronicles",29],["2 Chronicles",36],["Ezra",10],["Nehemiah",13],["Esther",10],["Job",42],["Psalms",150],["Proverbs",31],["Ecclesiastes",12],["Song of Songs",8],["Isaiah",66],["Jeremiah",52],["Lamentations",5],["Ezekiel",48],["Daniel",12],["Hosea",14],["Joel",3],["Amos",9],["Obadiah",1],["Jonah",4],["Micah",7],["Nahum",3],["Habakkuk",3],["Zephaniah",3],["Haggai",2],["Zechariah",14],["Malachi",4],
+          ["Matthew",28],["Mark",16],["Luke",24],["John",21],["Acts",28],["Romans",16],["1 Corinthians",16],["2 Corinthians",13],["Galatians",6],["Ephesians",6],["Philippians",4],["Colossians",4],["1 Thessalonians",5],["2 Thessalonians",3],["1 Timothy",6],["2 Timothy",4],["Titus",3],["Philemon",1],["Hebrews",13],["James",5],["1 Peter",5],["2 Peter",3],["1 John",5],["2 John",1],["3 John",1],["Jude",1],["Revelation",22]
+        ];
+        function initBibleReader(){
+          var bookSel = $("#bibleBook"), chapSel = $("#bibleChapter"), btn = $("#bibleReadBtn");
+          if (!bookSel || !chapSel || !btn) return;
+          bookSel.innerHTML = "";
+          BIBLE_BOOKS.forEach(function(b){
+            var o = document.createElement("option"); o.value = b[0]; o.textContent = b[0]; bookSel.appendChild(o);
+          });
+          bookSel.value = "John";
+          function fillChapters(){
+            var found = BIBLE_BOOKS.filter(function(b){ return b[0] === bookSel.value; })[0];
+            var max = found ? found[1] : 1;
+            var prev = parseInt(chapSel.value, 10) || 1;
+            chapSel.innerHTML = "";
+            for (var i = 1; i <= max; i++){ var o2 = document.createElement("option"); o2.value = i; o2.textContent = "Chapter " + i; chapSel.appendChild(o2); }
+            chapSel.value = Math.min(prev, max);
+            syncBibleBtn();
+          }
+          function syncBibleBtn(){
+            var ref = bookSel.value + " " + chapSel.value;
+            btn.href = nivUrl(ref);
+            btn.textContent = "Read " + ref + " in NIV";
+          }
+          bookSel.addEventListener("change", fillChapters);
+          chapSel.addEventListener("change", syncBibleBtn);
+          fillChapters();
+          chapSel.value = "1"; syncBibleBtn();
         }
         function renderLists(){ renderVotd(); renderServe(); renderPlan(); }
         function syncListEditors(){
@@ -1702,6 +1785,7 @@ Sunday | John 4</pre>
         renderAnnouncements();
         renderCustomEvents();
         renderLists();
+        initBibleReader();
         syncDerived();
         refreshDynamic();
       })();
