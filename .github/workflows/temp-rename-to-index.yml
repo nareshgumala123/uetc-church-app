@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Rename uploaded file to index.html
         run: |
+          rm -f index.html
           git mv church-app-starter.html index.html
           git config user.name "nareshgumala123"
           git config user.email "nareshgumala123@users.noreply.github.com"
